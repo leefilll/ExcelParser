@@ -4,6 +4,7 @@ from numpy import nan
 from utils.broadcaster_manager import Broadcaster
 from utils.util import *
 
+
 class DataHandler:
     def __init__(self, file_name):
 
@@ -45,16 +46,19 @@ class DataHandler:
                 break
         # print(self.data[0][self.middle_row])
 
-
     def cut_by_broadcaster(self):
         """ Slice the raw excel data to matrices by broadcasters """
         mid_row = self.middle_row
         mid_col = self.middle_col
         matrices = []
-        matrices.append(self.data.loc[3:mid_row-1, 0:mid_col-1].values) # table in upper left
-        matrices.append(self.data.loc[3:mid_row-1, mid_col+1:].values)  # table in upper right
-        matrices.append(self.data.loc[mid_row+1:, :mid_col-1].values)   # table in lower left
-        matrices.append(self.data.loc[mid_row+1:, mid_col+1:].values)   # table in lower right
+        # table in upper left
+        matrices.append(self.data.loc[3:mid_row - 1, 0:mid_col - 1].values)
+        # table in upper right
+        matrices.append(self.data.loc[3:mid_row - 1, mid_col + 1:].values)
+        # table in lower left
+        matrices.append(self.data.loc[mid_row + 1:, :mid_col - 1].values)
+        # table in lower right
+        matrices.append(self.data.loc[mid_row + 1:, mid_col + 1:].values)
         return matrices
 
     def init_broadcasters(self, matrix):
@@ -62,13 +66,15 @@ class DataHandler:
         broadcaster_name = matrix[0][1]
         broadcaster = Broadcaster(broadcaster_name)
         programs_matrix = matrix[2:-4, :]   # matrix about programs
-        ratings_matrix = matrix[-4:, :]     # matrix about ratings for broadcaster
+        # matrix about ratings for broadcaster
+        ratings_matrix = matrix[-4:, :]
 
         for program_info in programs_matrix:
             # make object of Program and push to broadcaster's program array
             if program_info[0] is nan:
                 continue
-            broadcaster.add_programs(program_info[0], program_info[1], program_info[2:])
+            broadcaster.add_programs(
+                program_info[0], program_info[1], program_info[2:])
 
         # Set broadcaster's total ratings
         prime_ratings = ratings_matrix[2][-4:]
@@ -77,4 +83,3 @@ class DataHandler:
         # print(broadcaster.rating_prime.get_ratings_as_array())
 
         self.broadcasters.append(broadcaster)
-

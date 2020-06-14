@@ -11,9 +11,10 @@ from utils.util import *
 from utils.messages import *
 from ui.ui import Ui_dialog
 
-ORGANIZATION_NAME = 'poleewer'
+ORGANIZATION_NAME = 'leefilll'
 ORGANIZATION_DOMAIN = 'none.com'
 APPLICATION_NAME = 'Rating Extractor'
+
 
 class MainWindow(QtWidgets.QDialog, Ui_dialog):
     def __init__(self, parent=None):
@@ -63,7 +64,6 @@ class MainWindow(QtWidgets.QDialog, Ui_dialog):
         for widget in self.text_widget_list:
             widget.setEnabled(False)
 
-
     @pyqtSlot()
     def file_browser(self):
         settings = QSettings()
@@ -72,7 +72,8 @@ class MainWindow(QtWidgets.QDialog, Ui_dialog):
         #     return
 
         filter = "xls(*.xls *.xlsx)"
-        self.file_name = QtWidgets.QFileDialog.getOpenFileName(self, filter=filter)[0]
+        self.file_name = QtWidgets.QFileDialog.getOpenFileName(self, filter=filter)[
+            0]
         self.textBrowser.setText("")
         if self.file_name:
             self.print_messages()
@@ -173,7 +174,6 @@ class MainWindow(QtWidgets.QDialog, Ui_dialog):
 
         self.use_default_setting()
 
-
     def cancel_setting(self):
         for t in self.text_widget_list:
             t.setPlainText("")
@@ -181,14 +181,30 @@ class MainWindow(QtWidgets.QDialog, Ui_dialog):
     def print_messages(self):
         data_handler = DataHandler(self.file_name)
         bc_list = data_handler.broadcasters
+        is_weekend = any(
+            day in data_handler.date_str for day in ["(토)", "(일)"])
+        print("is_weekend: ", is_weekend)
+        chosun_news_name = ""
 
-        test = get_matrix_programs(bc_list, ["TV조선뉴스9", "JTBC뉴스룸", "MBN종합뉴스", "뉴스A"])
+        if is_weekend:
+            chosun_news_name = "TV조선뉴스7"
+        else:
+            chosun_news_name = "TV조선뉴스9"
+
+        news_names = [chosun_news_name, "JTBC뉴스룸", "MBN종합뉴스", "뉴스A"]
+        print("names: ", news_names)
+
+        matrix = get_matrix_programs(
+            bc_list, news_names)
 
         # Print Basic Information
-        self.textBrowser.append(print_name(self.user_team, self.user_name, data_handler.date_str))
+        self.textBrowser.append(print_name(
+            self.user_team, self.user_name, data_handler.date_str))
         # self.textBrowser.append("\n")
-        self.textBrowser.append("\n수도권 일일 가구 {}".format(print_capital_summary(bc_list, data_handler.d_matrix[2])) )
-        self.textBrowser.append("수도권 프라임 가구 {}".format(print_capital_summary(bc_list, data_handler.p_matrix[2])))
+        self.textBrowser.append("\n수도권 일일 가구 {}".format(
+            print_capital_summary(bc_list, data_handler.d_matrix[2])))
+        self.textBrowser.append("수도권 프라임 가구 {}".format(
+            print_capital_summary(bc_list, data_handler.p_matrix[2])))
         # self.textBrowser.append("\n")
         self.textBrowser.append("\n1. 채널 시청률")
         self.textBrowser.append("○ 일일 시청률")
@@ -198,7 +214,9 @@ class MainWindow(QtWidgets.QDialog, Ui_dialog):
         self.textBrowser.append("2. 주요 프로그램 시청률 (수도권 기준)")
         self.textBrowser.append("")
         self.textBrowser.append("○ 메인뉴스 시청률")
-        self.textBrowser.append(print_main_programs(bc_list, test, ["TV조선뉴스9", "JTBC뉴스룸", "MBN종합뉴스", "뉴스A"]))
+        self.textBrowser.append(print_main_programs(
+            bc_list, matrix, news_names))
+
 
 if __name__ == '__main__':
     QCoreApplication.setApplicationName(ORGANIZATION_NAME)

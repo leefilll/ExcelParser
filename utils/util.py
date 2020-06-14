@@ -6,6 +6,7 @@ from numpy import arange
 
 # TODO: Remove repeated codes
 
+
 def sort_by_broadcasters(broadcasters, order=None):
     """ Sort the broadcasters by name """
     ordered_list = [None for _ in range(len(broadcasters))]
@@ -84,5 +85,3 @@ def get_rank(ordered_ratings):
     ranks = empty_like(temp)
     ranks[temp] = arange(len(ordered_ratings))
     return ranks[0] + 1
-
-

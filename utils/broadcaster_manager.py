@@ -54,6 +54,7 @@ class Rating:
     Note that if rating_type is None,
     it means broadcasters' ratings
     '''
+
     def __init__(self, rating_type=None):
         self.type = rating_type
         self.ratings_2549 = {}
@@ -83,4 +84,3 @@ class Rating:
             self.ratings_house["전국"],
             self.ratings_house["수도권"]
         ))
-
