@@ -5,7 +5,10 @@
 # Created by: PyQt5 UI code generator 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
+
+
 from PyQt5 import QtCore, QtGui, QtWidgets
+
 
 class Ui_dialog(object):
     def setupUi(self, dialog):
@@ -21,7 +24,7 @@ class Ui_dialog(object):
         self.groupBox.setGeometry(QtCore.QRect(20, 42, 241, 111))
         self.groupBox.setObjectName("groupBox")
         self.formLayoutWidget = QtWidgets.QWidget(self.groupBox)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(10, 28, 221, 61))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(10, 28, 221, 71))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setLabelAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
@@ -68,7 +71,7 @@ class Ui_dialog(object):
         self.basic_team.setObjectName("basic_team")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.basic_team)
         self.checkbox = QtWidgets.QCheckBox(self.groupBox)
-        self.checkbox.setEnabled(False)
+        self.checkbox.setEnabled(True)
         self.checkbox.setGeometry(QtCore.QRect(166, -1, 81, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -265,9 +268,12 @@ class Ui_dialog(object):
         self.label_4.setText(_translate("dialog", "기본"))
         self.label_6.setText(_translate("dialog", "비교 순서"))
         self.label_7.setText(_translate("dialog", "주요"))
+        self.bc_default.setPlaceholderText(_translate("dialog", "TV CHOSUN"))
         self.label_8.setText(_translate("dialog", "기본값: TV CHOSUN"))
+        self.bc_list.setPlaceholderText(_translate("dialog", "JTBC, MBN, 채널A"))
         self.label_9.setText(_translate("dialog", "기본값: JTBC, MBN, 채널A"))
         self.label_10.setText(_translate("dialog", "프로그램"))
+        self.bc_main.setPlaceholderText(_translate("dialog", "TV조선뉴스9, JTBC뉴스룸, MBN종합뉴스, 뉴스A"))
         self.label_11.setText(_translate("dialog", "기본값: 메인 뉴스"))
         self.label_13.setText(_translate("dialog", "(쉼표로 구분)"))
         self.label_14.setText(_translate("dialog", "(쉼표로 구분)"))

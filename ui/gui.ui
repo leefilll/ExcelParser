@@ -43,7 +43,7 @@
       <x>10</x>
       <y>28</y>
       <width>221</width>
-      <height>61</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -154,7 +154,7 @@
    </widget>
    <widget class="QCheckBox" name="checkbox">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -291,6 +291,9 @@
     <property name="tabChangesFocus">
      <bool>true</bool>
     </property>
+    <property name="placeholderText">
+     <string>TV CHOSUN</string>
+    </property>
    </widget>
    <widget class="QLabel" name="label_8">
     <property name="enabled">
@@ -342,6 +345,9 @@
     </property>
     <property name="tabChangesFocus">
      <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>JTBC, MBN, 채널A</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_9">
@@ -419,6 +425,9 @@
     </property>
     <property name="tabChangesFocus">
      <bool>true</bool>
+    </property>
+    <property name="placeholderText">
+     <string>TV조선뉴스9, JTBC뉴스룸, MBN종합뉴스, 뉴스A</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_11">
